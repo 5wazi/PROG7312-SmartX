@@ -1,0 +1,53 @@
+@model AggregateViewModel
+@{
+    ViewData["Title"] = "Meter Aggregation";
+}
+
+<h1>Meter Aggregation Demo</h1>
+<p class="subtitle">Exercises the overloaded <code>+</code> / <code>-</code> operators on <code>SensorLoad</code> — pick two sensors that share a unit.</p>
+
+<div class="card">
+    <form asp-controller="Aggregate" asp-action="Compute" method="post">
+        <div class="form-grid">
+            <div>
+                <label asp-for="SensorAId">Sensor A</label>
+                <select asp-for="SensorAId">
+                    <option value="">Select…</option>
+                    @foreach (var s in Model.Sensors)
+                    {
+                        <option value="@s.Id">@s.MacAddress (@s.Unit)</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <label asp-for="SensorBId">Sensor B</label>
+                <select asp-for="SensorBId">
+                    <option value="">Select…</option>
+                    @foreach (var s in Model.Sensors)
+                    {
+                        <option value="@s.Id">@s.MacAddress (@s.Unit)</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <label asp-for="Operation">Operation</label>
+                <select asp-for="Operation">
+                    <option value="add">Add (Meter1 + Meter2)</option>
+                    <option value="subtract">Subtract (Meter1 - Meter2)</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn gold" style="margin-top:14px;" type="submit">Compute</button>
+    </form>
+
+    @if (!string.IsNullOrEmpty(Model.Error))
+    {
+        <div class="alert error">@Model.Error</div>
+    }
+    @if (Model.Result is not null)
+    {
+        <div class="alert success">
+            <code>@Model.Result.Expression</code> = <strong>@Model.Result.Value.ToString("0.##")@Model.Result.Unit</strong>
+        </div>
+    }
+</div>
