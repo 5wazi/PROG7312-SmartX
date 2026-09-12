@@ -1,0 +1,19 @@
+## .NET
+bin/
+obj/
+out/
+*.user
+*.suo
+
+## IDE
+.vs/
+.vscode/
+.idea/
+
+## Uploads generated at runtime
+SmartX.Api/wwwroot/uploads/*
+!SmartX.Api/wwwroot/uploads/.gitkeep
+
+## OS
+.DS_Store
+Thumbs.db
