@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Smart-X Gateway";
+}
+
+<h1>Smart-X Data Ingestion &amp; Validation Gateway</h1>
+<p class="subtitle">Hybrid IoT ecosystem for distributed environment monitoring — hydroponic farms, utility trackers, and smart grid installations.</p>
+
+<div class="card-grid">
+    <div class="card pillar-card">
+        <span class="pillar-badge active">ACTIVE — PART 1</span>
+        <h2>Sensor Data Ingestion &amp; Telemetry</h2>
+        <p>Register ESP32 sensor nodes, stream live telemetry through the generic ingestion API, watch anomaly detection and gamified health streaks in real time.</p>
+        <a class="btn gold" asp-controller="Sensors" asp-action="Index">Open module →</a>
+    </div>
+
+    <div class="card pillar-card disabled">
+        <span class="pillar-badge disabled">DISABLED — PART 2</span>
+        <h2>Real-Time Command Stream &amp; History</h2>
+        <p>Bidirectional device commands and a replayable event history. Ships in Part 2 of the POE.</p>
+        <button class="btn" disabled>Coming in Part 2</button>
+    </div>
+
+    <div class="card pillar-card disabled">
+        <span class="pillar-badge disabled">DISABLED — FINAL POE</span>
+        <h2>Network Topology &amp; Mesh Routing</h2>
+        <p>Visualise the mesh network and routing between gateway nodes. Ships in the final POE submission.</p>
+        <button class="btn" disabled>Coming in the final POE</button>
+    </div>
+</div>
+
+<div class="card" style="margin-top:24px;">
+    <h2>Quick links</h2>
+    <p class="subtitle" style="margin-bottom:12px;">Everything below belongs to the active Sensor Data Ingestion &amp; Telemetry pillar.</p>
+    <div class="form-grid">
+        <a class="btn" asp-controller="Dashboard" asp-action="Index">Live Dashboard</a>
+        <a class="btn" asp-controller="Deployment" asp-action="Index">Deployment Validator</a>
+        <a class="btn" asp-controller="Aggregate" asp-action="Index">Meter Aggregation Demo</a>
+    </div>
+</div>
