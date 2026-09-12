@@ -1,0 +1,48 @@
+@model DeploymentValidateViewModel
+@{
+    ViewData["Title"] = "Deployment Validator";
+    var tree = ViewData["Tree"] as DeploymentNodeDto;
+}
+
+<h1>Deployment Tree Validator</h1>
+<p class="subtitle">Sensor registration paths are checked with a recursive descent through the facility/zone/sub-zone tree below.</p>
+
+<div class="card">
+    <h2>Facility tree</h2>
+    @if (tree is not null)
+    {
+        <ul>@Html.Raw(RenderNode(tree))</ul>
+    }
+</div>
+
+<div class="card" style="margin-top:18px;">
+    <h2>Try a path</h2>
+    <form asp-controller="Deployment" asp-action="Validate" method="post">
+        <div class="form-grid">
+            <div>
+                <label asp-for="Path">Deployment path</label>
+                <input asp-for="Path" placeholder="Root/Facility A/Zone 1/Sub-Zone B" />
+            </div>
+        </div>
+        <button class="btn gold" style="margin-top:12px;" type="submit">Validate</button>
+    </form>
+
+    @if (Model.Result is not null)
+    {
+        <div class="alert @(Model.Result.IsValid ? "success" : "error")">@Model.Result.Message</div>
+    }
+</div>
+
+@functions {
+    // Recursively walks the facility/zone/sub-zone tree to build the nested
+    // <ul> display — the same shape of recursion the API uses server-side to
+    // validate a path against this tree.
+    private static string RenderNode(DeploymentNodeDto node)
+    {
+        var childrenHtml = node.Children.Count > 0
+            ? "<ul>" + string.Join("", node.Children.Select(RenderNode)) + "</ul>"
+            : "";
+
+        return $"<li>{System.Net.WebUtility.HtmlEncode(node.Name)}{childrenHtml}</li>";
+    }
+}
