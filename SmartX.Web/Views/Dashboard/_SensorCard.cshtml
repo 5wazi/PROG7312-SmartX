@@ -1,0 +1,29 @@
+@model SensorSummaryDto
+@{
+    var isAnomaly = Model.RecentValues.Count > 0 && (Model.RecentValues[^1] < Model.SafeMin || Model.RecentValues[^1] > Model.SafeMax);
+    var borderColor = isAnomaly ? "#b3432b" : (Model.IsOnline ? "#2e7d5b" : "#cfc9b8");
+}
+<div class="card sensor-card" data-sensor-id="@Model.Id" style="border-top:4px solid @borderColor;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+        <div>
+            <strong>@Model.MacAddress</strong>
+            <div class="subtitle" style="margin:2px 0 10px;">@Model.DeploymentLocation</div>
+        </div>
+        <span class="badge @(Model.IsOnline ? "online" : "offline")">@(Model.IsOnline ? "Online" : "Offline")</span>
+    </div>
+
+    <div class="sparkline-wrap">
+        @Html.Raw(SparklineRenderer.Render(Model.RecentValues, Model.SafeMin, Model.SafeMax))
+        <div>
+            <div class="latest-value" style="font-size:1.3rem; font-weight:700; color:@(isAnomaly ? "#b3432b" : "#101a33");">
+                @(Model.RecentValues.Count > 0 ? $"{Model.RecentValues[^1]:0.##}{Model.Unit}" : "—")
+            </div>
+            <div class="streak">🔥 @Model.CurrentStreak-streak</div>
+        </div>
+    </div>
+
+    @if (isAnomaly)
+    {
+        <div class="alert error anomaly-alert" style="margin-top:10px;">⚠ Reading outside safe range (@Model.SafeMin – @Model.SafeMax@Model.Unit) — streak reset.</div>
+    }
+</div>

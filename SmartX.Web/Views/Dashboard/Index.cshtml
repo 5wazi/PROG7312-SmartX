@@ -1,0 +1,28 @@
+@model DashboardViewModel
+@{
+    ViewData["Title"] = "Live Dashboard";
+}
+
+<h1>Live Telemetry Dashboard</h1>
+<p class="subtitle">The chosen engagement strategy: real-time sparkline feedback reinforced with gamified Sensor Health Streaks.</p>
+
+<div class="card-grid" id="statsGrid" style="margin-bottom:8px;">
+    @await Html.PartialAsync("_StatsCards", Model.Stats)
+</div>
+
+<div class="card-grid" id="sensorCards">
+    @foreach (var s in Model.Sensors)
+    {
+        @await Html.PartialAsync("_SensorCard", s)
+    }
+</div>
+
+<p id="emptyState" class="subtitle" style="@(Model.Sensors.Count == 0 ? "" : "display:none;")">
+    No sensors registered yet — head to <a asp-controller="Sensors" asp-action="Index">Sensor Ingestion</a> to add one, or wait a moment for the default demo sensors to appear.
+</p>
+
+@section Scripts {
+    <script>
+        SmartX.pollDashboard();
+    </script>
+}

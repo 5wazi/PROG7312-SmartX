@@ -1,0 +1,8 @@
+@model DashboardStats?
+@if (Model is not null)
+{
+    <div class="card"><h2>@Model.TotalSensors</h2><span class="subtitle">Registered sensors</span></div>
+    <div class="card"><h2>@Model.OnlineSensors / @Model.TotalSensors</h2><span class="subtitle">Online right now</span></div>
+    <div class="card"><h2>🏆 @Model.BestStreakEver</h2><span class="subtitle">Best streak ever recorded</span></div>
+    <div class="card"><h2>@Model.AverageCurrentStreak</h2><span class="subtitle">Average current streak</span></div>
+}
