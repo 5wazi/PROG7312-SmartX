@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart-X Gateway</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="app-shell">
+        <nav class="side-nav">
+            <div class="brand">
+                <span class="brand-mark">X</span>
+                <div>
+                    <div class="brand-title">Smart-X</div>
+                    <div class="brand-subtitle">IoT Gateway</div>
+                </div>
+            </div>
+
+            <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+            <a class="nav-link" asp-controller="Sensors" asp-action="Index">Sensor Ingestion</a>
+            <a class="nav-link" asp-controller="Dashboard" asp-action="Index">Live Dashboard</a>
+            <a class="nav-link" asp-controller="Deployment" asp-action="Index">Deployment Validator</a>
+            <a class="nav-link" asp-controller="Aggregate" asp-action="Index">Meter Aggregation</a>
+
+            <div class="nav-disabled">
+                <span>Command Stream &amp; History</span>
+                <small>Part 2 — disabled</small>
+            </div>
+            <div class="nav-disabled">
+                <span>Network Topology &amp; Mesh Routing</span>
+                <small>Final PoE — disabled</small>
+            </div>
+        </nav>
+
+        <main class="content">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
