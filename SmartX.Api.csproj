@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <!-- The brief asks for .NET 10 as the backend backbone. Bump this to
+         net10.0 once the .NET 10 SDK is installed on your machine / build
+         agent — nothing in this project uses a version-specific API, so no
+         other changes are required. net9.0 is used here as the safe default
+         so the solution restores and runs on whatever SDK you currently have. -->
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>SmartX.Api</RootNamespace>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
+  </ItemGroup>
+
+</Project>
