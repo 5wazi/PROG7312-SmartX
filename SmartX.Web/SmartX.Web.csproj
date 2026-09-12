@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <!-- See the note in SmartX.Api.csproj — bump to net10.0 once that SDK is
+         installed locally; nothing here depends on a specific version. -->
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>SmartX.Web</RootNamespace>
+  </PropertyGroup>
+
+</Project>
